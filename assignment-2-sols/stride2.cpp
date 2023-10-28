@@ -47,22 +47,7 @@ public:
                 // Update the previous address field
                 entry.prevAccessAddr = addr;
             }
-	else{
-		// not a stride
-		// global variable value, if 0 then it's start
-		if(glo == 0){
-			rpt[0].prevAccessAddr = addr;
-			rpt[0].tag = loadPC;
-		}				
-		else{
-			rpt[glo+1].stride = rpt[glo].prevAccessAddr - addr;
-			if (rpt[glo+1].stride == rpt[glo].stride and rpt[glo].state < 2){
-				rpt[glo+1].state += 1;
-			}
-		}
-		glo++;
 	}
-        }
     }
 
     void train(ADDRINT addr, ADDRINT loadPC) {
@@ -95,6 +80,7 @@ public:
 			entry.state = 1;
 		}	    	
 	    }
+
             // Update the stride and previous address fields
             entry.stride = new_stride;
             entry.prevAccessAddr = addr;
